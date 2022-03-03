@@ -11,33 +11,33 @@ contract ProofOfStudent {
   }
   
   // record a student name
-  function lagoon(string memory name) public payable {
+  function lagoon() public payable {
     require(msg.value == 0.001 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
 
-  function ocean(string memory name) public payable {
+  function ocean() public payable {
     require(msg.value == 0.002 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
 
-  function beach(string memory name) public payable {
+  function beach() public payable {
     require(msg.value == 0.003 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
 
-  function pool(string memory name) public payable {
+  function pool() public payable {
     require(msg.value == 0.004 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
-  function reef(string memory name) public payable {
+  function reef() public payable {
     require(msg.value == 0.005 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
 
-  function grand(string memory name) public payable {
+  function grand() public payable {
     require(msg.value == 0.006 ether);
-    recordProof(hashing(name));
+    //recordProof(hashing(name));
   }
   
   // SHA256 for Integrity
