@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Name in Blockchain Class</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <!-- <script src="./node_modules/web3/dist/web3.min.js">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Supawee Resort</h1>
+
+            <table border="1" width="50%">
+                <tr bgcolor="#9AFEFF"> <th width="50%">Lagoon Water Villa</th><th width="50%">Ocean Water Villa</th><th width="50%">Beach Pool Villa</th></tr>
+                <tr align="center"> 
+                    <td><br><img src="https://maldivesfinest.com/wp-content/uploads/2020/06/lagoon-overwater-villa.jpg" height="200"><br>
+                        <button id="btnLagoon">reserve</button>0.001 ETH<br><br></td>
+                    <td><br><img src="https://hideawaybeachmaldives.com/wp-content/uploads/2016/08/Hideaway-Maldives-villas-6-Ocean-villa-18.jpg" height="200"><br>
+                        <button id="btnOcean">reserve</button>0.002 ETH<br><br></td>
+                    <td><br><img src="https://www.devasom.com/khaolak/wp-content/uploads/sites/3/2019/08/54_Beachfront_Pool_Villa-1_W.jpg" height="200"><br>
+                        <button id="btnBeach">reserve</button>0.003 ETH<br><br></td>
+                </tr>
+                <tr bgcolor="#9AFEFF"> <th width="50%">Pool Water Villa</th><th width="50%">Reef Pool Water Villa</th><th width="50%">Grand Residence</th></tr>
+                <tr align="center">
+                    <td><br><img src="https://i.pinimg.com/originals/94/21/fd/9421fd34a4b488b7a88598f0da6da1ec.jpg" height="200"><br>
+                        <button id="btnPool">reserve</button>0.004 ETH<br><br></td>
+                    <td><br><img src="https://www.luxeasiamaldives.com/photos/18-2-GRANDPARKKODIPPARUMALDIVESReefPoolWaterVillaReefPoolWaterVilla-a1b66f45d4e080b3c869c3a3364431444-med.jpg" height="200"><br>
+                        <button id="btnReef">reserve</button>0.005 ETH<br><br></td>
+                    <td><br><img src="https://dykhzttck504m.cloudfront.net/thumbnails/036cfc0952404ae0e8562e3333b42a9b1caae665ce3b749f19adeb4b483ede12/1200/667.jpg" height="200"><br>
+                        <button id="btnGrand">reserve</button>0.006 ETH<br><br></td>
+                </tr>
+            </table>
+            
+   
+            
+            <table border="1" width="30%" id = "addtable"> 
+                <tr bgcolor="#9AFEFF">
+                    <th>Time</th>
+                    <th>Room</th>
+                    <th>Reserver(address)</th>
+                </tr>
+            </table>
+            
+
+        <!-- <label class="col-lg-2 control-label">
+        Check Student Name</label>
+        <input id="document7" type="text">
+        <button id="btnCheck">Check</button> 
+               
+        <label class="col-lg-2 control-label">Status</label>
+        <h2 id="result"></h2>
+        Status: <span id="status">Loading...</span> -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+    </script>
+
+    <script>
+        function addTable(time,name,owner) {
+            var table = document.getElementById("addtable");
+            var body = table.createTBody();
+            var row = body.insertRow(0);
+
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = new Date(Number(time)).toLocaleDateString();
+            cell2.innerHTML = name;
+            cell3.innerHTML = owner;
+        }
+
+    </script>
+
+    <script>
+        
+        async function loadWeb3() {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                window.ethereum.enable();
+            }
+        }
+
+        function now(){
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var datenow = today.getTime().toString()
+            return datenow
+        }
+
+        let currentAccount = null;
+        window.ethereum
+            .request({ method: 'eth_accounts' })
+            .then(handleAccountsChanged)
+            .catch((err) => {
+            // Some unexpected error.
+            // For backwards compatibility reasons, if no accounts are available,
+            // eth_accounts will return an empty array.
+            console.error(err);
+            });
+
+        // Note that this event is emitted on page load.
+        // If the array of accounts is non-empty, you're already
+        // connected.
+        window.ethereum.on('accountsChanged', handleAccountsChanged);
+
+        // For now, 'eth_accounts' will continue to always return an array
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                // MetaMask is locked or the user has not connected any accounts
+                console.log('Please connect to MetaMask.');
+            } else if (accounts[0] !== currentAccount) {
+                currentAccount = accounts[0];
+                // Do any other work!
+            }
+        }
+
+        let abi = [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "text",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "reason",
+                    "type": "string"
+                }
+            ],
+            "name": "RegistrationError",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "text",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "hash",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "ReserveAdd",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "beach",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                }
+            ],
+            "name": "checkName",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "grand",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "lagoon",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "ocean",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "pool",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "reef",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        }
+    ];
+        async function loadContract() {
+            return await new window.web3.eth.Contract(abi, '0x50Ca6909F6Bf614Ed3C5F9A87b6354cAD9dA5684');
+        }
+
+        async function load() {
+            await loadWeb3();
+            window.contract = await loadContract();
+            updateStatus('Ready!');
+        }
+        
+        function updateStatus(status) {
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = status;
+            console.log(status);
+        }
+
+        $("#btnLagoon").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.lagoon("lagoon",currentAccount,now())
+                .send({from: currentAccount, value: 1000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+           
+            window.contract.once('ReserveAdd', {}, function (error, event) {
+                if (!error) {
+                    console.log(event);
+                    $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                        + event.returnValues.hash);
+                    addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                }
+            });
+                
+        });
+
+        $("#btnOcean").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.ocean("ocean",currentAccount,now())
+                .send({from: currentAccount, value: 2000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+                window.contract.once('ReserveAdd', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                            + event.returnValues.hash);
+                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    }
+                });
+                    
+            });
+
+        $("#btnBeach").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.beach("beach",currentAccount,now())
+                .send({from: currentAccount, value: 3000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+                window.contract.once('ReserveAdd', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                            + event.returnValues.hash);
+                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    }
+                });
+                    
+            });
+
+        $("#btnPool").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.pool("pool",currentAccount,now())
+                .send({from: currentAccount, value: 4000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+                window.contract.once('ReserveAdd', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                            + event.returnValues.hash);
+                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    }
+                });
+                    
+            });
+
+        $("#btnReef").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.reef("reef",currentAccount,now())
+                .send({from: currentAccount, value: 5000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+                window.contract.once('ReserveAdd', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                            + event.returnValues.hash);
+                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    }
+                });
+                    
+            });
+
+        $("#btnGrand").click(function() {
+            console.log(currentAccount);
+            window.contract.methods.grand("grand",currentAccount,now())
+                .send({from: currentAccount, value: 6000000000000000}, function(error, result) {
+                    $("#result").html(result);
+                });
+                window.contract.once('ReserveAdd', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
+                            + event.returnValues.hash);
+                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    }
+                });
+                    
+            });
+
+        /*$("#btnCheck").click(function() {
+            window.contract.methods.checkName($("#document7").val()).call(function(error, result){
+                if(!error) {
+                    $("#result").html(result.toString());
+                } else
+                    console.error(error);
+            });     
+        }); */
+
+        load();
+    </script>
+</body>
+</html>
