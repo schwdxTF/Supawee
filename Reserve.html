@@ -196,32 +196,9 @@
                     "internalType": "string",
                     "name": "name",
                     "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "reserver",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "timestamp",
-                    "type": "string"
                 }
             ],
-            "name": "beach",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "name",
-                    "type": "string"
-                }
-            ],
-            "name": "checkName",
+            "name": "checkRoom",
             "outputs": [
                 {
                     "internalType": "bool",
@@ -280,7 +257,7 @@
                     "type": "string"
                 }
             ],
-            "name": "grand",
+            "name": "poly",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
@@ -303,7 +280,7 @@
                     "type": "string"
                 }
             ],
-            "name": "lagoon",
+            "name": "prince",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
@@ -326,7 +303,7 @@
                     "type": "string"
                 }
             ],
-            "name": "ocean",
+            "name": "roman",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
@@ -349,7 +326,7 @@
                     "type": "string"
                 }
             ],
-            "name": "pool",
+            "name": "space",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
@@ -372,7 +349,30 @@
                     "type": "string"
                 }
             ],
-            "name": "reef",
+            "name": "truck",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "reserver",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "timestamp",
+                    "type": "string"
+                }
+            ],
+            "name": "vict",
             "outputs": [],
             "stateMutability": "payable",
             "type": "function"
@@ -381,7 +381,7 @@
 
 
         async function loadContract() {
-            return await new window.web3.eth.Contract(abi, '0x7dbA48cFb84617244bd22a5537418D2e18D2Ac8a');
+            return await new window.web3.eth.Contract(abi, '0x0509eD62a4a0D5F321d507BE656d628EB1769c4B');
         }
 
         async function load() {
@@ -398,7 +398,7 @@
 
         $("#btnLagoon").click(function() {
             console.log(currentAccount);
-            window.contract.methods.lagoon("lagoon",currentAccount,now())
+            window.contract.methods.poly("poly",currentAccount,now())
                 .send({from: currentAccount, value: 1000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -408,7 +408,6 @@
                     console.log(event);
                     $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                         + event.returnValues.hash);
-                    //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     location.reload();
                 }
             });
@@ -425,7 +424,7 @@
 
         $("#btnOcean").click(function() {
             console.log(currentAccount);
-            window.contract.methods.ocean("ocean",currentAccount,now())
+            window.contract.methods.space("space",currentAccount,now())
                 .send({from: currentAccount, value: 2000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -435,7 +434,7 @@
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
                         location.reload();
-                            //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        
                     }
                 });
 
@@ -452,7 +451,7 @@
 
         $("#btnBeach").click(function() {
             console.log(currentAccount);
-            window.contract.methods.beach("beach",currentAccount,now())
+            window.contract.methods.roman("roman",currentAccount,now())
                 .send({from: currentAccount, value: 3000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -462,7 +461,6 @@
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
                         location.reload();
-                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
 
@@ -479,7 +477,7 @@
 
         $("#btnPool").click(function() {
             console.log(currentAccount);
-            window.contract.methods.pool("pool",currentAccount,now())
+            window.contract.methods.vict("vict",currentAccount,now())
                 .send({from: currentAccount, value: 4000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -489,7 +487,6 @@
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
                         location.reload();
-                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
 
@@ -506,7 +503,7 @@
 
         $("#btnReef").click(function() {
             console.log(currentAccount);
-            window.contract.methods.reef("reef",currentAccount,now())
+            window.contract.methods.truck("truck",currentAccount,now())
                 .send({from: currentAccount, value: 5000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -516,7 +513,6 @@
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
                         location.reload();
-                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
 
@@ -533,7 +529,7 @@
 
         $("#btnGrand").click(function() {
             console.log(currentAccount);
-            window.contract.methods.grand("grand",currentAccount,now())
+            window.contract.methods.prince("prince",currentAccount,now())
                 .send({from: currentAccount, value: 6000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
@@ -543,7 +539,6 @@
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
                         location.reload();
-                    //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
 
