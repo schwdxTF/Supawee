@@ -5,7 +5,7 @@ contract b6210236_b6238124 {
 
   mapping (bytes32 => bool) private listRoom;
 
-  //---events----
+  //---events-----
   event ReserveAdd(
     address from,   
     string text,
