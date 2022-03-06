@@ -61,7 +61,7 @@ contract b6210236_b6238124 {
         return;
     }
     reserve_store.push(ReserveStore(name,reserver,timestamp));
-    emit ReserveAdd(msg.sender, name,hashing(name),reserver,timestamp);
+    emit ReserveAdd(msg.sender, "Polynesian",hashing(name),reserver,timestamp);
     
   }
 
@@ -77,7 +77,7 @@ contract b6210236_b6238124 {
         return;
     }
     reserve_store.push(ReserveStore(name,reserver,timestamp));
-    emit ReserveAdd(msg.sender, name,hashing(name),reserver,timestamp);
+    emit ReserveAdd(msg.sender, "Space",hashing(name),reserver,timestamp);
     
   }
 
@@ -93,7 +93,7 @@ contract b6210236_b6238124 {
         return;
     }
     reserve_store.push(ReserveStore(name,reserver,timestamp));
-    emit ReserveAdd(msg.sender, name,hashing(name),reserver,timestamp);
+    emit ReserveAdd(msg.sender, "Roman",hashing(name),reserver,timestamp);
     
   }
 
@@ -104,7 +104,7 @@ contract b6210236_b6238124 {
         return;
     }
     else if (msg.value != 0.004 ether) {
-        emit ReserveError(msg.sender, name, "Victorain Coach require 0.004 ETH. Please repay.");
+        emit ReserveError(msg.sender, "Victorain Coach", "Victorain Coach require 0.004 ETH. Please repay.");
         payable(msg.sender).transfer(msg.value);
         return;
     }
@@ -124,7 +124,7 @@ contract b6210236_b6238124 {
         return;
     }
     reserve_store.push(ReserveStore(name,reserver,timestamp));
-    emit ReserveAdd(msg.sender, name,hashing(name),reserver,timestamp);
+    emit ReserveAdd(msg.sender, "Luxury Truck",hashing(name),reserver,timestamp);
     
   }
 
@@ -141,7 +141,7 @@ contract b6210236_b6238124 {
     }
 
     reserve_store.push(ReserveStore(name,reserver,timestamp));
-    emit ReserveAdd(msg.sender, name,hashing(name),reserver,timestamp);
+    emit ReserveAdd(msg.sender, "Luxury Princess Room",hashing(name),reserver,timestamp);
     
   }
   

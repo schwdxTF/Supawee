@@ -33,7 +33,10 @@
             </table>
             
    
-            
+            <label class="col-lg-2 control-label">Status</label>
+        <h2 id="result"></h2>
+
+        
             <table border="1" width="30%" id = "revtable"> 
                 <tr bgcolor="#9AFEFF">
                     <th>Time</th>
@@ -387,7 +390,7 @@
 
 
         async function loadContract() {
-            return await new window.web3.eth.Contract(abi, '0x0509eD62a4a0D5F321d507BE656d628EB1769c4B');
+            return await new window.web3.eth.Contract(abi, '0x50cF8eda1C6E5f22C9a5Fa4A4675c2f6b28376b4');
         }
 
         async function load() {
@@ -412,17 +415,20 @@
             window.contract.once('ReserveAdd', {}, function (error, event) {
                 if (!error) {
                     console.log(event);
-                    $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                        + event.returnValues.hash);
-                    location.reload();
+                    
+                    $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*");    
                 }
             });
 
             window.contract.once('ReserveError', {}, function (error, event) {
                 if (!error) {
                     console.log(event);
-                    $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                        + event.returnValues.reason);
+                    $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
 
                 }
             });
@@ -440,9 +446,10 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                            + event.returnValues.hash);
-                        location.reload();
+                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*");
                         
                     }
                 });
@@ -450,8 +457,9 @@
                 window.contract.once('ReserveError', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                            + event.returnValues.reason);
+                        $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
                     }
                 });
                     
@@ -467,17 +475,19 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                            + event.returnValues.hash);
-                        location.reload();
+                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*");
                     }
                 });
 
                 window.contract.once('ReserveError', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                            + event.returnValues.reason);
+                        $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
                     }
                 });
                     
@@ -493,17 +503,19 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                            + event.returnValues.hash);
-                        location.reload();
+                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*"); 
                     }
                 });
 
                 window.contract.once('ReserveError', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                            + event.returnValues.reason);
+                        $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
                     }
                 });
                     
@@ -519,17 +531,19 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                            + event.returnValues.hash);
-                        location.reload();
+                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*");
                     }
                 });
 
                 window.contract.once('ReserveError', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                            + event.returnValues.reason);
+                        $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
                     }
                 });
                     
@@ -545,17 +559,19 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
-                            + event.returnValues.hash);
-                        location.reload();
+                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                            +"<br/>Hased as:<br/>"+ event.returnValues.hash
+                            +"<br/>Have a nice vacation :)"
+                            +"<br/>*refresh to check your transaction on the table*");
                     }
                 });
 
                 window.contract.once('ReserveError', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
-                            + event.returnValues.reason);
+                        $("#result").html("Error " 
+                        + "<br/>" + event.returnValues.reason
+                        + "<br/>We will tranfer your ETH back.");
                     }
                 });    
                     
