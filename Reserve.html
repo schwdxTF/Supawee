@@ -34,7 +34,7 @@
             
    
             
-            <table border="1" width="30%" id = "addtable"> 
+            <table border="1" width="30%" id = "revtable"> 
                 <tr bgcolor="#9AFEFF">
                     <th>Time</th>
                     <th>Room</th>
@@ -56,8 +56,8 @@
     </script>
 
     <script>
-        function addTable(time,name,owner) {
-            var table = document.getElementById("addtable");
+        function RevTable(timestamp,name,reserver) {
+            var table = document.getElementById("revtable");
             var body = table.createTBody();
             var row = body.insertRow(0);
 
@@ -65,10 +65,21 @@
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            cell1.innerHTML = new Date(Number(time)).toLocaleDateString();
+            cell1.innerHTML = new Date(Number(timestamp)).toLocaleDateString();
             cell2.innerHTML = name;
-            cell3.innerHTML = owner;
+            cell3.innerHTML = reserver;
         }
+
+        function getTableData(){
+            window.contract.methods.getReserve().call(function (error, result) {
+                console.log(result);
+
+            result.forEach(element =>{
+                RevTable(element.timestamp,element.name,element.reserver);
+            });
+            
+        });
+    }
 
     </script>
 
@@ -111,36 +122,12 @@
                 console.log('Please connect to MetaMask.');
             } else if (accounts[0] !== currentAccount) {
                 currentAccount = accounts[0];
+                getTableData();
                 // Do any other work!
             }
         }
 
         let abi = [
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "from",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "text",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "reason",
-                    "type": "string"
-                }
-            ],
-            "name": "RegistrationError",
-            "type": "event"
-        },
         {
             "anonymous": false,
             "inputs": [
@@ -176,6 +163,31 @@
                 }
             ],
             "name": "ReserveAdd",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "text",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "reason",
+                    "type": "string"
+                }
+            ],
+            "name": "ReserveError",
             "type": "event"
         },
         {
@@ -215,6 +227,36 @@
                     "internalType": "bool",
                     "name": "",
                     "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getReserve",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "reserver",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "timestamp",
+                            "type": "string"
+                        }
+                    ],
+                    "internalType": "struct b6210236_b6238124.ReserveStore[]",
+                    "name": "",
+                    "type": "tuple[]"
                 }
             ],
             "stateMutability": "view",
@@ -336,8 +378,10 @@
             "type": "function"
         }
     ];
+
+
         async function loadContract() {
-            return await new window.web3.eth.Contract(abi, '0x50Ca6909F6Bf614Ed3C5F9A87b6354cAD9dA5684');
+            return await new window.web3.eth.Contract(abi, '0x7dbA48cFb84617244bd22a5537418D2e18D2Ac8a');
         }
 
         async function load() {
@@ -364,7 +408,16 @@
                     console.log(event);
                     $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                         + event.returnValues.hash);
-                    addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                    location.reload();
+                }
+            });
+
+            window.contract.once('ReserveError', {}, function (error, event) {
+                if (!error) {
+                    console.log(event);
+                    $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                        + event.returnValues.reason);
                 }
             });
                 
@@ -381,9 +434,19 @@
                         console.log(event);
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
-                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        location.reload();
+                            //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
+
+                window.contract.once('ReserveError', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                            + event.returnValues.reason);
+                    }
+                });
+                    
                     
             });
 
@@ -398,9 +461,19 @@
                         console.log(event);
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
-                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        location.reload();
+                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
+
+                window.contract.once('ReserveError', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                            + event.returnValues.reason);
+                    }
+                });
+                    
                     
             });
 
@@ -415,9 +488,19 @@
                         console.log(event);
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
-                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        location.reload();
+                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
+
+                window.contract.once('ReserveError', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                            + event.returnValues.reason);
+                    }
+                });
+                    
                     
             });
 
@@ -432,9 +515,19 @@
                         console.log(event);
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
-                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        location.reload();
+                        //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
+
+                window.contract.once('ReserveError', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                            + event.returnValues.reason);
+                    }
+                });
+                    
                     
             });
 
@@ -449,20 +542,21 @@
                         console.log(event);
                         $("#result").html("Name: " + event.returnValues.text + "<br/>=> Hased as:"
                             + event.returnValues.hash);
-                        addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
+                        location.reload();
+                    //addTable(event.returnValues.timestamp,event.returnValues.text,event.returnValues.reserver);
                     }
                 });
+
+                window.contract.once('ReserveError', {}, function (error, event) {
+                    if (!error) {
+                        console.log(event);
+                        $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                            + event.returnValues.reason);
+                    }
+                });    
                     
             });
 
-        /*$("#btnCheck").click(function() {
-            window.contract.methods.checkName($("#document7").val()).call(function(error, result){
-                if(!error) {
-                    $("#result").html(result.toString());
-                } else
-                    console.error(error);
-            });     
-        }); */
 
         load();
     </script>
