@@ -527,7 +527,7 @@
         $("#btnReef").click(function() {
             console.log(currentAccount);
             window.contract.methods.truck("truck",currentAccount,now())
-                .send({from: currentAccount, value: 500000000000000}, function(error, result) {
+                .send({from: currentAccount, value: 5000000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
                 window.contract.once('ReserveAdd', {}, function (error, event) {
