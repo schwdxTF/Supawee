@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Student Name in Blockchain Class</title>
+    <title>Booking SUPAWEE RESORT</title>
     <link rel="stylesheet" type="text/css" href="main.css">
     <!-- <script src="./node_modules/web3/dist/web3.min.js">
     </script> -->
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
-<body>
+<body background="https://pbs.twimg.com/media/E3kkPShVcAMfdCH?format=jpg&name=4096x4096">
+    <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1033.ani), url(https://cur.cursors-4u.net/nature/nat-11/nat1033.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/red-bobblehead-bunny.html" target="_blank" title="Red Bobblehead Bunny"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Red Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
+
     <div class="container">
         <h1>Supawee Resort</h1>
+        <center>
+            <table border="0" width="100%">
+            <td>
 
             <table border="1" width="50%">
-                <tr bgcolor="#9AFEFF"> <th width="50%">Lagoon Water Villa</th><th width="50%">Ocean Water Villa</th><th width="50%">Beach Pool Villa</th></tr>
-                <tr align="center"> 
-                    <td><br><img src="https://maldivesfinest.com/wp-content/uploads/2020/06/lagoon-overwater-villa.jpg" height="200"><br>
-                        <button id="btnLagoon">reserve</button>0.001 ETH<br><br></td>
-                    <td><br><img src="https://hideawaybeachmaldives.com/wp-content/uploads/2016/08/Hideaway-Maldives-villas-6-Ocean-villa-18.jpg" height="200"><br>
-                        <button id="btnOcean">reserve</button>0.002 ETH<br><br></td>
-                    <td><br><img src="https://www.devasom.com/khaolak/wp-content/uploads/sites/3/2019/08/54_Beachfront_Pool_Villa-1_W.jpg" height="200"><br>
-                        <button id="btnBeach">reserve</button>0.003 ETH<br><br></td>
+                <tr bgcolor="#ffec59"> <th width="50%">Polynesian</th><th width="50%">Space</th><th width="50%">Roman</th></tr>
+                <tr align="center" bgcolor="#FFFFFF"> 
+                    <td><br><img src="https://flh.ca/media/9490/polynesian-theme-banner.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010090000000" height="150"><br>
+                        <button id="btnLagoon">reserve</button><br><br>0.001 ETH<br><br></td>
+                    <td><br><img src="https://flh.ca/media/73238/2016_space-highres-22.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010110000000" height="150"><br>
+                        <button id="btnOcean">reserve</button><br><br>0.002 ETH<br><br></td>
+                    <td><br><img src="https://flh.ca/media/9486/roman-theme-banner.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010090000000" height="150"><br>
+                        <button id="btnBeach">reserve</button><br><br>0.003 ETH<br><br></td>
                 </tr>
-                <tr bgcolor="#9AFEFF"> <th width="50%">Pool Water Villa</th><th width="50%">Reef Pool Water Villa</th><th width="50%">Grand Residence</th></tr>
-                <tr align="center">
-                    <td><br><img src="https://i.pinimg.com/originals/94/21/fd/9421fd34a4b488b7a88598f0da6da1ec.jpg" height="200"><br>
-                        <button id="btnPool">reserve</button>0.004 ETH<br><br></td>
-                    <td><br><img src="https://www.luxeasiamaldives.com/photos/18-2-GRANDPARKKODIPPARUMALDIVESReefPoolWaterVillaReefPoolWaterVilla-a1b66f45d4e080b3c869c3a3364431444-med.jpg" height="200"><br>
-                        <button id="btnReef">reserve</button>0.005 ETH<br><br></td>
-                    <td><br><img src="https://dykhzttck504m.cloudfront.net/thumbnails/036cfc0952404ae0e8562e3333b42a9b1caae665ce3b749f19adeb4b483ede12/1200/667.jpg" height="200"><br>
-                        <button id="btnGrand">reserve</button>0.006 ETH<br><br></td>
+                <tr bgcolor="#ffec59"> <th width="50%">Victorian Coach</th><th width="50%">Luxury Truck</th><th width="50%">Luxury Princess Room</th></tr>
+                <tr align="center" bgcolor="#FFFFFF">
+                    <td><br><img src="https://flh.ca/media/9496/victorian-coach-theme-banner.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010090000000" height="150"><br>
+                        <button id="btnPool">reserve</button><br><br>0.004 ETH<br><br></td>
+                    <td><br><img src="https://flh.ca/media/9536/truck-banner.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010090000000" height="150"><br>
+                        <button id="btnReef">reserve</button><br><br>0.005 ETH<br><br></td>
+                    <td><br><img src="https://flh.ca/media/115706/princess-2.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010120000000" height="150"><br>
+                        <button id="btnGrand">reserve</button><br><br>0.006 ETH<br><br></td>
                 </tr>
             </table>
-            
+        </td>
+        <td align="top">
    
             <label class="col-lg-2 control-label">Status</label>
         <h2 id="result"></h2>
@@ -45,15 +51,11 @@
                 </tr>
             </table>
             
+        </center>
+    </td>
 
-        <!-- <label class="col-lg-2 control-label">
-        Check Student Name</label>
-        <input id="document7" type="text">
-        <button id="btnCheck">Check</button> 
-               
-        <label class="col-lg-2 control-label">Status</label>
-        <h2 id="result"></h2>
-        Status: <span id="status">Loading...</span> -->
+    </table>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
     </script>
@@ -390,7 +392,7 @@
 
 
         async function loadContract() {
-            return await new window.web3.eth.Contract(abi, '0x50cF8eda1C6E5f22C9a5Fa4A4675c2f6b28376b4');
+            return await new window.web3.eth.Contract(abi, '0xaC6497b49e43B7E22A4d5DCC2e315120a5169eE2');
         }
 
         async function load() {
@@ -416,7 +418,7 @@
                 if (!error) {
                     console.log(event);
                     
-                    $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                    $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*");    
@@ -446,7 +448,7 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                        $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*");
@@ -475,7 +477,7 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                        $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*");
@@ -503,7 +505,7 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                        $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*"); 
@@ -525,13 +527,13 @@
         $("#btnReef").click(function() {
             console.log(currentAccount);
             window.contract.methods.truck("truck",currentAccount,now())
-                .send({from: currentAccount, value: 5000000000000000}, function(error, result) {
+                .send({from: currentAccount, value: 500000000000000}, function(error, result) {
                     $("#result").html(result);
                 });
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                        $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*");
@@ -559,7 +561,7 @@
                 window.contract.once('ReserveAdd', {}, function (error, event) {
                     if (!error) {
                         console.log(event);
-                        $("#result").html("Your reservation room" + event.returnValues.text + "has been successful!!"
+                        $("#result").html("Your reservation room " + event.returnValues.text + " has been successful!!"
                             +"<br/>Hased as:<br/>"+ event.returnValues.hash
                             +"<br/>Have a nice vacation :)"
                             +"<br/>*refresh to check your transaction on the table*");
